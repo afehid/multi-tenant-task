@@ -106,4 +106,62 @@ mutation {
 ### Login
 ```graphql
 mutation {
-  login(email: "user@example.co
+  login(email: "user@example.com", password: "password123") {
+    accessToken
+  }
+}
+```
+
+### Enable 2FA
+```graphql
+mutation {
+  enable2FA {
+    secret
+    qrCode
+  }
+}
+```
+
+## Project Structure
+```
+src/
+├── app.module.ts        # Main application module
+├── main.ts             # Application entry point
+├── config/            # Configuration files
+├── prisma/            # Database schema and client
+├── auth/              # Authentication module
+│   ├── guards/       # JWT and 2FA guards
+│   ├── strategies/   # Passport strategies
+│   └── decorators/   # Custom decorators
+├── users/            # Users module
+│   ├── entities/    # User entity definitions
+│   └── dto/         # Data transfer objects
+└── common/           # Shared resources
+```
+
+## Environment Configuration
+
+Create a `.env` file:
+```bash
+DATABASE_URL="postgresql://user:password@localhost:5432/main_db"
+COMPANY1_DATABASE_URL="postgresql://user:password@localhost:5433/company1_db"
+JWT_SECRET="your-secret-key-here"
+PORT=3000
+```
+
+## Docker Support
+
+```bash
+# Start all services
+$ docker-compose up -d
+
+# View logs
+$ docker-compose logs -f
+
+# Stop all services
+$ docker-compose down
+```
+
+## Support
+
+- Author - [Ahmed Salah]
